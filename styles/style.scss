@@ -1,0 +1,251 @@
+$font: #EBEFF2;
+$lightBorder: #C7D1D9;
+$darkBorder: #9FB0BF;
+
+@mixin tablet {
+    @media only screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media only screen and (min-width: 1024px) {
+        @content;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-image: url('../img/background.jpeg');
+    background-position: center;
+    background-size: cover;
+    backdrop-filter: blur(6px);
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 200vh;
+    padding: 0;
+    overflow-x: hidden;
+    color: $font;
+    font-family: 'Montserrat', sans-serif;
+    @include tablet() {
+        height: 140vh;
+    }
+    @include laptop() {
+        height: 120vh;
+    }
+
+}
+
+.menu--open {
+    height: 160vh;
+    @include tablet() {
+        overflow: hidden;
+        height: 140vh;
+    }
+    @include laptop() {
+        height: 120vh;
+    }
+}
+
+.robotoFont {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.darkBackground {
+    background-color: rgba(0,0,0, 0.5);
+    height: 100%;
+}
+
+.material-icons {
+    cursor: pointer;
+}
+
+.headingValues {
+    margin: 0;
+    padding-top: 10px;
+    font-weight: normal;
+}
+
+.textCenter {
+    text-align: center;
+
+}
+
+.textLeft {
+    @include tablet() {
+        text-align: left;
+    }
+}
+
+.textRight {
+    @include tablet() {
+        text-align: right;
+    }
+}
+
+.header {
+    &__heading {
+        margin-bottom: 50px;
+    }
+}
+
+.form {
+    border: 2px solid $lightBorder;
+    border-radius: 15px;
+    width: 200px;
+    padding: 2px 10px 2px;
+    margin: 0 auto;
+
+    @include tablet() {
+        margin: 0;
+    }
+    
+    &__input {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: $font;
+        font-size: 18px;
+        width: 80%;
+    }
+}
+
+.form--city {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.location__countryName {
+    margin-bottom: -10px;
+}
+
+.flex--wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: 0 auto; 
+
+    flex-direction: column;
+
+    @include tablet() {
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 600px;
+        flex-direction: row;
+    }
+    @include laptop() {
+        width: 800px;
+    }
+}
+
+.current__flex--wrapper {
+    width: 175px;
+}
+
+.grid-template {
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    gap: 15px;
+    width: min-content;
+    margin: 0 auto;
+    margin-top: 10px;
+
+}
+
+.grid-template--size {
+    grid-template-columns: 75px 75px 75px;
+}
+
+
+.button {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    padding: 5px;
+    color: $font;
+    text-decoration: none;
+    background-color: transparent;
+    border: 0;
+    border: 2px $lightBorder solid;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+    transition: .1s .3s  ease-in-out;
+}
+
+.button--active {
+    border: none;
+    border-bottom: 2px $lightBorder solid;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transition: .1s  ease-in-out;
+}
+
+.daysList {
+    height: 0;
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    width: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+    transition: .3s .1s ease-in-out;
+    &__item {
+        padding: 10px 0 10px;
+        border-bottom: 2px $lightBorder solid;
+        cursor: pointer;
+        
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+.daysList--visible {
+    height: 150px;
+}
+
+.locationSection {
+    margin-top: 0;
+
+    h2 {
+        @include tablet() {
+            padding: 0;
+        }
+    }
+}
+
+.locationFlex--wrapper {
+    @include tablet() {
+        width: 550px;
+    }
+    @include laptop() {
+        width: 750px;
+    }
+}
+
+
+.alertsContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.alertText {
+    width: 252px;
+}

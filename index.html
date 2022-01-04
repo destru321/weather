@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeatherApp</title>
+  <script src="scripts/weather.js" defer></script>
+  <script src="scripts/script.js" defer></script>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div class="darkBackground">
+    <header class="header">
+      <h1 class="header__heading textCenter headingValues" id="pageHeader">Weather</h1>
+    </header>
+    <main class="main">
+      <section class="section">
+        <div class="flex--wrapper locationFlex--wrapper">
+          <form action="" class="form form--city">
+            <input type="text" class="form__input robotoFont" placeholder="City name">
+            <span class="material-icons">&#xe8b6;</span>
+          </form>
+          <section id="location" class="section locationSection">
+            <h2 class="location__countryName textCenter headingValues" id="country"></h2>
+            <h2 class="textCenter headingValues" id="name"></h2>
+          </section>
+        </div>
+        <div class="flex--wrapper" id="weatherWrapper">
+          <section class="section">
+            <h2 class="textCenter headingValues">Current</h2>
+            <article class="current-article">
+              <div id="current">
+                <div class="flex--wrapper current__flex--wrapper">
+                  <div id="condition">
+                    <img id="icon"></img>
+                  </div>
+                  <div id="temp_c">
+                    <h3 class="value"></h3>
+                  </div>
+                </div>
+                <div class="grid-template grid-template--size">
+                  <div id="pressure_mb">
+                    <h4 class="textCenter headingValues">Pressure</h4>
+                    <h3 class="textCenter value" ></h3>
+                  </div>
+                  <div id="feelslike_c">
+                    <h4 class="textCenter headingValues">Feel t.</h4>
+                    <h3 class="textCenter value" ></h3>
+                  </div>
+                  <div id="wind_kph">
+                    <h4 class="textCenter headingValues">Wind</h4>
+                    <h3 class="textCenter value" ></h3>
+                  </div>
+                </div>
+                <section class="section">
+                  <h2 class="textCenter headingValues">Air quality</h2>
+                  <div id="air_quality" class="grid-template">
+                    <div id="co">
+                      <h4 class="textCenter headingValues">co</h4>
+                      <h3 class="textCenter value" ></h3>
+                    </div>
+                    <div id="no2">
+                      <h4 class="textCenter headingValues">no2</h4>
+                      <h3 class="textCenter value" ></h3>
+                    </div>
+                    <div id="o3">
+                      <h4 class="textCenter headingValues">o3</h4>
+                      <h3 class="textCenter value" ></h3>
+                    </div>
+                    <div id="pm2_5">
+                      <h4 class="textCenter headingValues">pm25</h4>
+                      <h3 class="textCenter value" ></h3>
+                    </div>
+                    <div id="so2">
+                      <h4 class="textCenter headingValues">so2</h4>
+                      <h3 class="textCenter value" ></h3>
+                    </div>
+                    <div id="pm10">
+                      <h4 class="textCenter headingValues">pm10</h4>
+                      <h3 class="textCenter value" ></h3>
+
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </article>
+          </section>
+          <section class="section" id="forecast">
+            <h2 class="textCenter  headingValues">3 days forecast</h2>
+            <div class="textCenter">
+              <a class="button robotoFont" href="#pageHeader">Select day</a>
+              <ul class="daysList">
+                <li class='daysList__item'><a id="firstDate" href="#pageHeader"></a></li>
+                <li class='daysList__item'><a id="secondDate" href="#pageHeader"></a></li>
+                <li class='daysList__item'><a id="thirdDate" href="#pageHeader"></a></li>
+              </ul>
+            </div>
+            <section class="section">
+              <div id="forecastday">
+                <div class="classChecker">
+                  <div id="date">
+                    <h3 class="value textCenter forecastDate"></h3>
+                  </div>
+                </div>
+                <div class="flex--wrapper current__flex--wrapper">
+                  <div id="condition">
+                    <img id="icon"></img>
+                  </div>
+                  <div id="avgtemp_c">
+                    <h3  class='value'></h3>
+                  </div>
+                </div>
+                <div class="grid-template grid-template--size">
+                  <div id="avgvis_km">
+                    <h4 class="textCenter headingValues">Visibility</h4>
+                    <h3  class="textCenter value"></h3>
+                  </div>
+                  <div id="mintemp_c">
+                    <h4 class="textCenter headingValues">Min t.</h4>
+                    <h3  class="textCenter value"></h3>
+                  </div>
+                  <div id="maxwind_kph">
+                    <h4 class="textCenter headingValues">Wind</h4>
+                    <h3  class="textCenter value"></h3>
+                  </div>
+                </div>
+                <div id="alerts">
+                  <h2 class="textCenter headingValues">Alerts</h2>
+                  <p class="textCenter" id="noAlerts"></p>
+                  <div class="alertsContent">
+
+                  </div>
+                </div>
+            </section>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
