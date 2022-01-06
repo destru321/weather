@@ -143,6 +143,10 @@ function getTime(city) {
         const date = data.date;
         getWeather(city, data.date)
     })
+    .then(() => {
+        document.querySelector('.main').classList.remove('main--waiting');
+        document.querySelector('.weatherWait').classList.add('weatherWait--invisible')
+    })
 }
 
 window.addEventListener('load', () => {
@@ -151,13 +155,15 @@ window.addEventListener('load', () => {
 
 document.querySelector('.material-icons').addEventListener('click', () =>{
     document.querySelector('.alertsContent').innerText = '';
+    document.querySelector('.main').classList.add('main--waiting');
+    document.querySelector('.weatherWait').classList.remove('weatherWait--invisible')
     getTime(document.querySelector('.form__input').value);
 })
 
 document.querySelectorAll('.daysList__item').forEach(item => {
     item.addEventListener('click', () => {
         document.querySelector('.alertsContent').innerText = '';
-        getForecastWeather(document.getElementById('name').innerText, item.innerText);
+        getWeather(document.getElementById('name').innerText, item.innerText);
     })
 });
 
