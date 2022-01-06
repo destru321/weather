@@ -1,13 +1,11 @@
-const date = new Date();
+function getWeather(city, inputDate) {
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=7f8379f5bddf43e1a8f104330212412&q=${city}&days=7&aqi=yes&alerts=yes`;
 
-function getCurrentWeather(city) {
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=7f8379f5bddf43e1a8f104330212412&q=${city}&aqi=yes`;
-
-    fetch (url)
+    fetch(url)
     .then((res) => {
         return res.json();
     })
-    .then ((data) => {
+    .then((data) => {
 
         // Generowanie nazw lokacji
         document.getElementById('location').childNodes.forEach(child => {
@@ -58,17 +56,7 @@ function getCurrentWeather(city) {
                 });
             }
         });
-    });
-}
 
-function getForecastWeather(city, inputDate) {
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=7f8379f5bddf43e1a8f104330212412&q=${city}&days=7&aqi=no&alerts=yes`;
-
-    fetch(url)
-    .then((res) => {
-        return res.json();
-    })
-    .then((data) => {
         const forecast = data.forecast;
 
         document.getElementById('firstDate').innerText = forecast.forecastday[0].date;
@@ -79,7 +67,6 @@ function getForecastWeather(city, inputDate) {
         // Przez istnienie stref czasowych musiałem podejść do tego w ten sposób
         forecast.forecastday.forEach(day => {
             if (day.date === inputDate) {
-                console.log('im here')
                 document.getElementById('forecastday').childNodes.forEach(child => {
                     if (child.className) {
                         child.childNodes.forEach(element => {
@@ -119,53 +106,52 @@ function getForecastWeather(city, inputDate) {
             } 
         })
 
-             //Generowanie alertów pogodowych
-            const alerts = data.alerts.alert;
-            const alertArr = alerts.slice(0, 3);
+        //Generowanie alertów pogodowych
+        const alerts = data.alerts.alert;
+        const alertArr = alerts.slice(0, 3);
 
-            const noAlertElement = document.getElementById('noAlerts');
+        const noAlertElement = document.getElementById('noAlerts');
 
-            if (alertArr[0] !== undefined) {
-                noAlertElement.innerText = '';
-
-                alertArr.forEach(alert => {
-                    const elem = document.createElement('p');
-                    elem.classList.add('textCenter');
-                    elem.classList.add('alertText');
-                    elem.innerText = alert.desc;
-                    document.querySelector('.alertsContent').appendChild(elem)
-                })
+        if (alertArr[0] !== undefined) {
+            noAlertElement.innerText = '';
+            alertArr.forEach(alert => {
+                const elem = document.createElement('p');
+                elem.classList.add('textCenter');
+                elem.classList.add('alertText');
+                elem.innerText = alert.desc;
+                document.querySelector('.alertsContent').appendChild(elem)
+            })
             
-            } else {
-                document.querySelector('.alertsContent').innerHTML = '';
-                noAlertElement.innerText = 'There are no weather alerts'
-                document.querySelector('body').classList.add('menu--open')
-            }
+        } else {
+            document.querySelector('.alertsContent').innerHTML = '';
+            noAlertElement.innerText = 'There are no weather alerts'
+            document.querySelector('body').classList.add('menu--open')
+        }
     })
 }
 
 // Wywoływanie powyższych funkcji
-let defultDate;
 
-if (date.getMonth() + 1 < 10 && date.getDate() < 10) {
-    defultDate = `${date.getFullYear()}-0${date.getMonth() +1}-0${date.getDate()}`
-} else if (date.getMonth() + 1 < 10 && date.getDate() > 10) {
-    defultDate = `${date.getFullYear()}-0${date.getMonth() +1}-${date.getDate()}`
-} else if (date.getMonth() + 1 > 10 && date.getDate() > 10) {
-    defultDate = `${date.getFullYear()}-${date.getMonth() +1}-0${date.getDate()}`
-} else {
-    defultDate = `${date.getFullYear()}-${date.getMonth() +1}-${date.getDate()}`
+function getTime(city) {
+    const url = `https://api.ipgeolocation.io/astronomy?apiKey=26da1ab6473d44ef8885cb1cbfe77e83&location=${city}`;
+
+    fetch (url)
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+        const date = data.date;
+        getWeather(city, data.date)
+    })
 }
 
 window.addEventListener('load', () => {
-    getCurrentWeather('Tokyo');
-    getForecastWeather('Tokyo', defultDate)
+    getTime('Tokyo');
 });
 
 document.querySelector('.material-icons').addEventListener('click', () =>{
     document.querySelector('.alertsContent').innerText = '';
-    getCurrentWeather(document.querySelector('.form__input').value, defultDate);
-    getForecastWeather(document.querySelector('.form__input').value, defultDate);
+    getTime(document.querySelector('.form__input').value);
 })
 
 document.querySelectorAll('.daysList__item').forEach(item => {
