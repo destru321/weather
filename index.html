@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <div class="darkBackground">
+  <div class="darkBackground" id="darkBackground">
     <header class="header">
       <h1 class="header__heading textCenter headingValues" id="pageHeader">Weather</h1>
     </header>
@@ -94,11 +94,11 @@
           <section class="section" id="forecast">
             <h2 class="textCenter  headingValues">3 days forecast</h2>
             <div class="textCenter">
-              <a class="button robotoFont" href="#pageHeader">Select day</a>
+              <a class="button robotoFont" id="dayButton">Select Day</a>
               <ul class="daysList">
-                <li class='daysList__item'><a id="firstDate" href="#pageHeader"></a></li>
-                <li class='daysList__item'><a id="secondDate" href="#pageHeader"></a></li>
-                <li class='daysList__item'><a id="thirdDate" href="#pageHeader"></a></li>
+                <li class='daysList__item'><a id="firstDate"></a></li>
+                <li class='daysList__item'><a id="secondDate"></a></li>
+                <li class='daysList__item'><a id="thirdDate"></a></li>
               </ul>
             </div>
             <section class="section">

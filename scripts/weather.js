@@ -108,25 +108,34 @@ function getWeather(city, inputDate) {
 
         //Generowanie alertów pogodowych
         const alerts = data.alerts.alert;
-        const alertArr = alerts.slice(0, 3);
+        const alertsArr = alerts.slice(0, 3);
 
         const noAlertElement = document.getElementById('noAlerts');
 
-        if (alertArr[0] !== undefined) {
+        if (alertsArr[0] !== undefined) {
             noAlertElement.innerText = '';
-            alertArr.forEach(alert => {
+            alertsArr.forEach(alert => {
                 const elem = document.createElement('p');
                 elem.classList.add('textCenter');
                 elem.classList.add('alertText');
-                elem.innerText = alert.desc;
-                document.querySelector('.alertsContent').appendChild(elem)
+                elem.innerText = alert.headline;
+                document.querySelector('.alertsContent').appendChild(elem);
             })
             
         } else {
             document.querySelector('.alertsContent').innerHTML = '';
-            noAlertElement.innerText = 'There are no weather alerts'
-            document.querySelector('body').classList.add('menu--open')
+            noAlertElement.innerText = 'There are no weather alerts';
+            document.querySelector('body').classList.add('menu--open');
         }
+    })
+    .then(() => {
+        document.querySelector('.main').classList.remove('main--waiting');
+        document.querySelector('.weatherWait').classList.add('weatherWait--invisible');
+    })
+    .catch(err => {
+        document.querySelector('.main').classList.remove('main--waiting');
+        document.querySelector('.weatherWait').style.color = 'red';
+        document.querySelector('.weatherWait').innerText = 'Wrong city name';
     })
 }
 
@@ -143,10 +152,6 @@ function getTime(city) {
         const date = data.date;
         getWeather(city, data.date)
     })
-    .then(() => {
-        document.querySelector('.main').classList.remove('main--waiting');
-        document.querySelector('.weatherWait').classList.add('weatherWait--invisible')
-    })
 }
 
 window.addEventListener('load', () => {
@@ -154,15 +159,16 @@ window.addEventListener('load', () => {
 });
 
 document.querySelector('.material-icons').addEventListener('click', () =>{
-    document.querySelector('.alertsContent').innerText = '';
     document.querySelector('.main').classList.add('main--waiting');
     document.querySelector('.weatherWait').classList.remove('weatherWait--invisible')
     getTime(document.querySelector('.form__input').value);
+    document.querySelector('.form__input').value = '';
+    document.querySelector('.weatherWait').style.color = 'white';
+    document.querySelector('.weatherWait').innerText = 'Wait...'
 })
 
 document.querySelectorAll('.daysList__item').forEach(item => {
     item.addEventListener('click', () => {
-        document.querySelector('.alertsContent').innerText = '';
         getWeather(document.getElementById('name').innerText, item.innerText);
     })
 });
